@@ -1,0 +1,3 @@
+package com.prinzlycoder.androidappconcepts.presentation.list
+
+interface ListItem
