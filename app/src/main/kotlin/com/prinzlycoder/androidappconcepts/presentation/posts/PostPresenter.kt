@@ -29,11 +29,14 @@ class PostPresenter(private val postInteractor: PostInteractor) : PostContract.P
         }
     }
 
-    private suspend fun getPostAsync() {
+    suspend fun getPostAsync() {
         view?.showProgress()
         when (val result = postInteractor.getPosts()) {
             is Result.Success -> view?.setPosts(result.data.map { it.mapToPostItem() })
-            is Result.Error -> result.throwable.message?.let { view?.showMessage(it) }
+            is Result.Error ->
+                result.throwable.message?.let {
+                    view?.showMessage(it)
+                }
         }
         view?.hideProgress()
     }
